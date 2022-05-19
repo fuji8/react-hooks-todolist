@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ToDo from './ToDo';
 
 interface Props {
@@ -8,26 +8,44 @@ interface Props {
     complete: boolean;
   }[];
   handleToggle: (id: number) => void;
-  handleFilter: () => void;
-  showFiltered: () => void;
+}
+
+enum filterTypeEnum {
+  ALL,
+  COMPLETE,
+  INCOMPLETE
+}
+
+const filteredToDo = (toDoList: {
+  id: number;
+  task: string;
+  complete: boolean;
+}[], type: number) => {
+  if(type == filterTypeEnum.ALL) return toDoList;
+  else if(type == filterTypeEnum.COMPLETE) return toDoList.filter(td => td.complete);
+  else if(type == filterTypeEnum.INCOMPLETE) return toDoList.filter(td => !td.complete);
+  else return []
 }
 
 const ToDoList = ({
   toDoList,
   handleToggle,
-  handleFilter,
-  showFiltered,
 }: Props) => {
+  const [filterType, setFilterType] = useState(filterTypeEnum.ALL);
+
   return (
     <div>
-      {toDoList.map((todo) => {
-        return <ToDo todo={todo} handleToggle={handleToggle} key={todo.id} />;
+      {filteredToDo(toDoList, filterType).map((todo) => {
+        return <ToDo todo={(todo)} handleToggle={handleToggle} key={todo.id} />;
       })}
-      <button style={{ margin: '20px' }} onClick={handleFilter}>
+      <button style={{ margin: '20px' }} onClick={() => setFilterType(filterTypeEnum.INCOMPLETE)}>
         Clear Completed
       </button>
-      <button style={{ margin: '20px' }} onClick={showFiltered}>
+      <button style={{ margin: '20px' }} onClick={() => setFilterType(filterTypeEnum.COMPLETE)}>
         Show Completed
+      </button>
+      <button style={{ margin: '20px' }} onClick={() => setFilterType(filterTypeEnum.ALL)}>
+        Show All
       </button>
     </div>
   );
