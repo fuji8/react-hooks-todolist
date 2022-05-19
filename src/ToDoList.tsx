@@ -35,9 +35,7 @@ const ToDoList = ({
 
   return (
     <div>
-      {filteredToDo(toDoList, filterType).map((todo) => {
-        return <ToDo todo={(todo)} handleToggle={handleToggle} key={todo.id} />;
-      })}
+      {filteredToDo(toDoList, filterType).map((todo) => <ToDo todo={(todo)} handleToggle={handleToggle} key={todo.id} />)}
       <button style={{ margin: '20px' }} onClick={() => setFilterType(filterTypeEnum.INCOMPLETE)}>
         Clear Completed
       </button>
