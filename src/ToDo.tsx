@@ -19,8 +19,6 @@ const ToDo = ({ todo, handleToggle }: Props) => {
     <div
       id={todo.id.toString()}
       key={todo.id + todo.task}
-      //name="todo"
-      //value={todo.id}
       onClick={handleClick}
       className={todo.complete ? 'todo strike' : 'todo'}
     >
