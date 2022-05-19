@@ -8,7 +8,6 @@ import ToDoForm from './ToDoForm';
 import './App.css';
 
 function App() {
-  const [allToDoList, setAllToDoList] = useState(data);
   const [toDoList, setToDoList] = useState(data);
 
   const handleToggle = (id: number) => {
@@ -18,28 +17,14 @@ function App() {
         : { ...task };
     });
     setToDoList(mapped);
-    setAllToDoList(mapped);
-  };
-
-  const handleFilter = () => {
-    const filtered = toDoList.filter((task) => {
-      return !task.complete;
-    });
-    setToDoList(filtered);
-  };
-
-  const showFiltered = () => {
-    setToDoList(allToDoList);
   };
 
   const addTask = (userInput: string) => {
-    let copy = [...toDoList];
-    copy = [
-      ...copy,
+    const copy = [
+      ...toDoList,
       { id: toDoList.length + 1, task: userInput, complete: false },
     ];
     setToDoList(copy);
-    setAllToDoList(copy);
   };
 
   return (
@@ -48,8 +33,6 @@ function App() {
       <ToDoList
         toDoList={toDoList}
         handleToggle={handleToggle}
-        handleFilter={handleFilter}
-        showFiltered={showFiltered}
       />
       <ToDoForm addTask={addTask} />
     </div>
