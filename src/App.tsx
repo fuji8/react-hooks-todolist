@@ -8,6 +8,7 @@ import './App.css';
 import ToDoForm from './ToDoForm';
 
 function App() {
+  const [alltoDoList, setAllToDoList] = useState(data);
   const [toDoList, setToDoList] = useState(data);
 
   const handleToggle = (id: number) => {
@@ -17,6 +18,7 @@ function App() {
         : { ...task };
     });
     setToDoList(mapped);
+    setAllToDoList(mapped);
   };
 
   const handleFilter = () => {
@@ -26,6 +28,10 @@ function App() {
     setToDoList(filtered);
   };
 
+  const showFiltered = () => {
+    setToDoList(alltoDoList);
+  };
+
   const addTask = (userInput: string) => {
     let copy = [...toDoList];
     copy = [
@@ -33,6 +39,7 @@ function App() {
       { id: toDoList.length + 1, task: userInput, complete: false },
     ];
     setToDoList(copy);
+    setAllToDoList(copy);
   };
 
   return (
@@ -42,6 +49,7 @@ function App() {
         toDoList={toDoList}
         handleToggle={handleToggle}
         handleFilter={handleFilter}
+        showFiltered={showFiltered}
       />
       <ToDoForm addTask={addTask} />
     </div>

@@ -9,9 +9,15 @@ interface Props {
   }[];
   handleToggle: (id: number) => void;
   handleFilter: () => void;
+  showFiltered: () => void;
 }
 
-const ToDoList = ({ toDoList, handleToggle, handleFilter }: Props) => {
+const ToDoList = ({
+  toDoList,
+  handleToggle,
+  handleFilter,
+  showFiltered,
+}: Props) => {
   return (
     <div>
       {toDoList.map((todo) => {
@@ -19,6 +25,9 @@ const ToDoList = ({ toDoList, handleToggle, handleFilter }: Props) => {
       })}
       <button style={{ margin: '20px' }} onClick={handleFilter}>
         Clear Completed
+      </button>
+      <button style={{ margin: '20px' }} onClick={showFiltered}>
+        Show Completed
       </button>
     </div>
   );
