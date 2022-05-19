@@ -5,6 +5,7 @@ import Header from './Header';
 import ToDoList from './ToDoList';
 
 import './App.css';
+import ToDoForm from './ToDoForm';
 
 function App() {
   const [toDoList, setToDoList] = useState(data);
@@ -25,6 +26,15 @@ function App() {
     setToDoList(filtered);
   };
 
+  const addTask = (userInput: string) => {
+    let copy = [...toDoList];
+    copy = [
+      ...copy,
+      { id: toDoList.length + 1, task: userInput, complete: false },
+    ];
+    setToDoList(copy);
+  };
+
   return (
     <div className="App">
       <Header />
@@ -33,6 +43,7 @@ function App() {
         handleToggle={handleToggle}
         handleFilter={handleFilter}
       />
+      <ToDoForm addTask={addTask} />
     </div>
   );
 }
