@@ -3,9 +3,9 @@ import data from './data.json';
 //components
 import Header from './Header';
 import ToDoList from './ToDoList';
+import ToDoForm from './ToDoForm';
 
 import './App.css';
-import ToDoForm from './ToDoForm';
 
 function App() {
   const [alltoDoList, setAllToDoList] = useState(data);
