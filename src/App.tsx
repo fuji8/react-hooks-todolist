@@ -8,7 +8,7 @@ import ToDoForm from './ToDoForm';
 import './App.css';
 
 function App() {
-  const [alltoDoList, setAllToDoList] = useState(data);
+  const [allToDoList, setAllToDoList] = useState(data);
   const [toDoList, setToDoList] = useState(data);
 
   const handleToggle = (id: number) => {
@@ -29,7 +29,7 @@ function App() {
   };
 
   const showFiltered = () => {
-    setToDoList(alltoDoList);
+    setToDoList(allToDoList);
   };
 
   const addTask = (userInput: string) => {
